@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISDb.Domain", "ISDb.Domain\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISDb.Application", "ISDb.Application\ISDb.Application.csproj", "{13DD0268-0154-47CC-905B-D69DDDCC495A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISDb.API", "ISDb.API\ISDb.API.csproj", "{C1B994F8-3F12-455B-8C1C-CCC7F58B8200}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{13DD0268-0154-47CC-905B-D69DDDCC495A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13DD0268-0154-47CC-905B-D69DDDCC495A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13DD0268-0154-47CC-905B-D69DDDCC495A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1B994F8-3F12-455B-8C1C-CCC7F58B8200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1B994F8-3F12-455B-8C1C-CCC7F58B8200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1B994F8-3F12-455B-8C1C-CCC7F58B8200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1B994F8-3F12-455B-8C1C-CCC7F58B8200}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

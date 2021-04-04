@@ -36,7 +36,7 @@ namespace ISDb.Domain.Mssql.Poco
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=ISTN26959\\SQLExpress;Database=ISDb;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(@"Server=ISTN26959\\SQLExpress;Database=ISDb;");
             }
         }
 
