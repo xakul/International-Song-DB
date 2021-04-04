@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
@@ -40,6 +41,16 @@ namespace ISDb.Domain.Mssql.Repository
         Task<bool> DeleteAsync(object[] keyValues, CancellationToken cancellationToken = default);
 
         Task<bool> DeleteAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default);
+        #endregion
+
+        #region Query
+        IQueryable<TEntity> Queryable();
+
+        IQueryable<TEntity> QueryableSql(string sql, params object[] parameters);
+
+        Task<int> ExecuteSqlAsync(string sql, params object[] parameters);
+
+        IQuery<TEntity> Query();
         #endregion
 
     }

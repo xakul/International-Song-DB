@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
@@ -75,6 +76,20 @@ namespace ISDb.Domain.Mssql.Repository
 
         public virtual async Task<bool> DeleteAsync<TKey>(TKey keyValue, CancellationToken cancellationToken = default)
             => await DeleteAsync(new object[] { keyValue }, cancellationToken);
+        #endregion
+
+        #region Query
+        public virtual IQueryable<TEntity> Queryable()
+            => this.Set;
+
+        public virtual IQueryable<TEntity> QueryableSql(string sql, params object[] parameters)
+            => this.Set.FromSqlRaw(sql, parameters);
+
+        public virtual async Task<int> ExecuteSqlAsync(string sql, params object[] parameters)
+            => await this.Context.Database.ExecuteSqlRawAsync(sql, parameters).ConfigureAwait(true);
+
+        public virtual IQuery<TEntity> Query()
+            => new Query<TEntity>(this);
         #endregion
     }
 }
