@@ -110,9 +110,10 @@ namespace ISDb.API
 
         private void RegisterServices(IServiceCollection services)
         {
-            services.AddDbContext<BaseContext>(options =>
-                options.UseSqlServer(@"Server=ISTN26959\\SQLExpress;Database=ISDb;"));
+            
+            services.AddDbContext<BaseContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:BaseContext"]));
             services.AddScoped<ServiceEngine>();
+
 
         }
     }

@@ -12,12 +12,11 @@ namespace ISDb.Application
         private MssqlRepository MssqlRepository { get; }
         protected MssqlContext MssqlContext { get; }
 
-        public readonly BaseContext baseContext;
+        public BaseContext context { get; }
 
-        public ServiceEngine()
+        public ServiceEngine(BaseContext context)
         {
-
-            this.MssqlContext = new MssqlContext(this.baseContext);
+            this.MssqlContext = new MssqlContext(context);
             this.MssqlRepository = new MssqlRepository(this.MssqlContext);
 
          }
