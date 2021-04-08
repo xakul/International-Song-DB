@@ -14,7 +14,7 @@ namespace ISDb.Domain.Mssql.Poco
         }
 
         public virtual DbSet<LoginLog> LoginLogs { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<User> User { get; set; }
         
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -37,7 +37,7 @@ namespace ISDb.Domain.Mssql.Poco
 
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=ISTN26959\\SQLExpress;Database=ISDb;");
+                optionsBuilder.UseSqlServer("Server=ISTN26959\\SQLExpress;Database=ISDb;Trusted_Connection=True;");
             }
         }
 

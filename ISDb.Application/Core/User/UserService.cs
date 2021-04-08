@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace ISDb.Application.Core.User
 {
@@ -26,8 +27,10 @@ namespace ISDb.Application.Core.User
 
             user = this._mssqlRepository.ToPoco(userModel);
 
+            userModel.RegisterDate = DateTime.UtcNow;
+
             this._mssqlRepository.Insert(user);
-            this._mssqlRepository.UnitOfWork.SaveChanges();
+            await this._mssqlRepository.UnitOfWork.SaveChangesAsync();
 
             try
             {
