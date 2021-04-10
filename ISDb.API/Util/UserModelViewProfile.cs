@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using ISDb.API.Controllers.Login;
 using ISDb.API.Controllers.User;
+using ISDb.Application.Core.Login;
 using ISDb.Application.Core.User;
 using System;
 using System.Collections.Generic;
@@ -13,6 +15,7 @@ namespace ISDb.API.Util
         public UserModelViewProfile()
         {
             CreateMap<UserModel, UserViewModel>().ReverseMap();
+            CreateMap<LoginModel, LoginViewModel>().ReverseMap();
         }
     }
 }

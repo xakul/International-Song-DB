@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System;
+using ISDb.Application.Core.Login;
 
 namespace ISDb.Application.Core.User
 {
@@ -52,6 +53,34 @@ namespace ISDb.Application.Core.User
             createdUserModel = this._mssqlRepository.ToModel(createdUser);
 
             return createdUserModel;
+
+        }
+
+        public async Task<UserModel> LoginControl(string email, string password)
+        {
+            Domain.Mssql.Poco.User user = null;
+            UserModel userModel;
+            try
+            {
+                user = await this._mssqlRepository.Repository
+                    .Queryable()
+                    .Where(a => a.Email == email && a.Password == password)
+                    .FirstOrDefaultAsync()
+                    .ConfigureAwait(true);
+            }
+            catch
+            {
+                //excpetion will be addded
+            }
+
+            if (user == null)
+            {
+                //excpetion will be addded
+            }
+
+            userModel = this._mssqlRepository.ToModel(user);
+
+            return userModel;
 
         }
     }
