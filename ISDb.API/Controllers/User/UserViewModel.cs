@@ -14,5 +14,6 @@ namespace ISDb.API.Controllers.User
         public string LastName { get; set; }
         public string CountryCode { get; set; }
         public DateTime RegisterDate { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

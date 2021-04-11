@@ -25,16 +25,6 @@ namespace ISDb.API.Controllers.Login
             this._serviceEngine = serviceEngine;
         }
 
-        [HttpPost("register")]
-        public async Task<ActionResult<LoginViewModel>> RegisterUser(UserViewModel userViewModel)
-        {
-            var userRegisterModel = this.ToModel(userViewModel);
-            var createdUserModel = await this._serviceEngine.UserService.CreateUser(userRegisterModel).ConfigureAwait(true);
-            var createdUserViewModel = this.ToViewModel(createdUserModel);
-
-            return Ok(createdUserViewModel);
-        }
-
         [HttpPost("login")]
         public async Task<ActionResult<LoginViewModel>> RegisterUser(LoginViewModel loginViewModel)
         {

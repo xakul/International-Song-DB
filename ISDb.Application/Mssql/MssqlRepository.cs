@@ -1,4 +1,5 @@
 ﻿using ISDb.Application.Core.User;
+using ISDb.Application.Core.UserAuth;
 using ISDb.Domain.Mssql.Poco;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace ISDb.Application.Mssql
         private readonly MssqlContext _mssqlContext;
 
         private BaseMssqlRepository<Domain.Mssql.Poco.User, UserModel> _userMssqlRepository;
+
+        private BaseMssqlRepository<Domain.Mssql.Poco.UserAuth, UserAuthModel> _userAuthMssqlRepository;
 
 
         public MssqlRepository(MssqlContext mssqlContext)
@@ -27,6 +30,18 @@ namespace ISDb.Application.Mssql
 
                 this._userMssqlRepository = new BaseMssqlRepository<Domain.Mssql.Poco.User, UserModel>(_mssqlContext);
                 return _userMssqlRepository;
+            }
+        }
+
+        public BaseMssqlRepository<Domain.Mssql.Poco.UserAuth, UserAuthModel> UserAuthMssqlRepository
+        {
+            get
+            {
+                if (this._userAuthMssqlRepository != null)
+                    return this._userAuthMssqlRepository;
+
+                this._userAuthMssqlRepository = new BaseMssqlRepository<Domain.Mssql.Poco.UserAuth, UserAuthModel>(_mssqlContext);
+                return _userAuthMssqlRepository;
             }
         }
     }

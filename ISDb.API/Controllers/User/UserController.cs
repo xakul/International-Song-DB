@@ -33,6 +33,27 @@ namespace ISDb.API.Controllers.User
             return Ok(createdUserViewModel);
         }
 
+        [HttpPost("register")]
+        public async Task<ActionResult<UserViewModel>> RegisterUser(UserViewModel userViewModel)
+        {
+            var userRegisterModel = this.ToModel(userViewModel);
+            var createdUserModel = await this._serviceEngine.UserService.CreateUser(userRegisterModel).ConfigureAwait(true);
+            var createdUserViewModel = this.ToViewModel(createdUserModel);
+
+            return Ok(createdUserViewModel);
+        }
+
+        [HttpPost("admin-register")]
+        public async Task<ActionResult<UserViewModel>> RegisterAdminUser(UserViewModel userViewModel)
+        {
+            userViewModel.IsAdmin = true;
+            var userRegisterModel = this.ToModel(userViewModel);
+            var createdUserModel = await this._serviceEngine.UserService.CreateUser(userRegisterModel).ConfigureAwait(true);
+            var createdUserViewModel = this.ToViewModel(createdUserModel);
+
+            return Ok(createdUserViewModel);
+        }
+
 
     }
 }

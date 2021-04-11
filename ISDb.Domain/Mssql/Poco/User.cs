@@ -38,5 +38,7 @@ namespace ISDb.Domain.Mssql.Poco
 
         [InverseProperty(nameof(LoginLog.User))]
         public virtual ICollection<LoginLog> LoginLogs { get; set; }
+        [InverseProperty("User")]
+        public virtual UserAuth UserAuth { get; set; }
     }
 }

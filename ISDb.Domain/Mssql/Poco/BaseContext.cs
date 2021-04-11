@@ -15,7 +15,7 @@ namespace ISDb.Domain.Mssql.Poco
 
         public virtual DbSet<LoginLog> LoginLogs { get; set; }
         public virtual DbSet<User> User { get; set; }
-        
+        public virtual DbSet<UserAuth> UserAuth { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,15 @@ namespace ISDb.Domain.Mssql.Poco
                     .WithMany(p => p.LoginLogs)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_LoginLog_User");
+            });
+
+            modelBuilder.Entity<UserAuth>(entity =>
+            {
+                entity.HasOne(d => d.User)
+                    .WithOne(p => p.UserAuth)
+                    .HasForeignKey<UserAuth>(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserAuth_User");
             });
 
             OnModelCreatingPartial(modelBuilder);

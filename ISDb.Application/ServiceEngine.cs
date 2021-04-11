@@ -1,4 +1,6 @@
-﻿using ISDb.Application.Core.User;
+﻿using ISDb.Application.Core.Login;
+using ISDb.Application.Core.User;
+using ISDb.Application.Core.UserAuth;
 using ISDb.Application.Mssql;
 using ISDb.Domain.Mssql.Poco;
 using System;
@@ -23,6 +25,10 @@ namespace ISDb.Application
 
         private IUserService _userService;
 
+        private IUserAuthService _userAuthService;
+
+        private ILoginService _loginService;
+
         public IUserService UserService
         {
             get
@@ -32,6 +38,30 @@ namespace ISDb.Application
 
                 this._userService = new UserService(this,this.MssqlRepository.UserMssqlRepository);
                 return this._userService;
+            }
+        }
+
+        public IUserAuthService UserAuthService
+        {
+            get
+            {
+                if (this._userAuthService != null)
+                    return this._userAuthService;
+
+                this._userAuthService = new UserAuthService(this, this.MssqlRepository.UserAuthMssqlRepository);
+                return this._userAuthService;
+            }
+        }
+
+        public ILoginService LoginService
+        {
+            get
+            {
+                if (this._loginService != null)
+                    return this._loginService;
+
+                this._loginService = new LoginService(this);
+                return this._loginService;
             }
         }
     }

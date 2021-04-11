@@ -18,6 +18,7 @@ namespace ISDb.Application.Util
                     MapperConfiguration config = new MapperConfiguration(mc =>
                     {
                         mc.AddProfile(new UserModelProfile());
+                        mc.AddProfile(new UserAuthProfile());
                     });
 
                     _mapper = config.CreateMapper();

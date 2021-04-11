@@ -6,6 +6,10 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System;
 using ISDb.Application.Core.Login;
+using ISDb.Application.Core.UserAuth;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace ISDb.Application.Core.User
 {
@@ -31,6 +35,13 @@ namespace ISDb.Application.Core.User
             userModel.RegisterDate = DateTime.UtcNow;
 
             this._mssqlRepository.Insert(user);
+            UserAuthModel userAuthModel = new UserAuthModel
+            {
+                UserId = userModel.Id,
+                IsAdmin = userModel.IsAdmin
+            };
+
+            await this.ServiceEngine.UserAuthService.CreateUserAuth(userAuthModel).ConfigureAwait(true);
             await this._mssqlRepository.UnitOfWork.SaveChangesAsync();
 
             try
@@ -78,10 +89,12 @@ namespace ISDb.Application.Core.User
                 //excpetion will be addded
             }
 
+            bool IsAdmin = await this.ServiceEngine.UserAuthService.CheckIsUserAdmin(user.Id).ConfigureAwait(true);
             userModel = this._mssqlRepository.ToModel(user);
+            userModel.IsAdmin = IsAdmin;
 
             return userModel;
-
         }
+
     }
 }
